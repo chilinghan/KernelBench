@@ -1,7 +1,7 @@
 import sys, os
 import src.utils as utils
 import time
-from src.prompt_constructor import prompt_generate_custom_cuda_from_prompt_template
+from src.prompt_constructor import get_prompt_for_backend
 
 """
 For testing infernece and quickly iterate on prompts 
@@ -25,7 +25,7 @@ def inference_with_prompt(arch_path, inference_server: callable = None, log_to_l
         with open("./scratch/model.py", "w") as f:
             f.write(arch)
 
-    custom_cuda_prompt = prompt_generate_custom_cuda_from_prompt_template(arch)
+    custom_cuda_prompt = get_prompt_for_backend["cuda"](arch)
 
     if log_to_local:    
         with open(f"./scratch/prompt.py", "w") as f:
